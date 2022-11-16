@@ -1,0 +1,80 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- pwa apple -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="wltkrrcpzm" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="../static/icons/icon.png" />
+    <!-- PWA android is not supporting currently-->
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <link rel="stylesheet" href="../static/css/ipad.css" />
+    <title>wltkrrcpzm</title>
+  </head>
+  <body>
+    <noscript>Please Enable JS.</noscript>
+    <noscript>자바스크립트를 활성화해주시기 바랍니다.</noscript>
+    <div class="ipad-content-area">
+      <div class="welcome-and-clock">
+        <div class="welcome-box">
+          Welcome <br />
+          {{userName}}
+        </div>
+        <div class="clock">
+          <div class="hand hour-hand"></div>
+          <div class="hand min-hand"></div>
+          <div class="hand second-hand"></div>
+          <div class="timetext">12:12:12</div>
+        </div>
+      </div>
+      <div class="resent-five">
+        <div class="recent-container">Recent 5 Arrivals / Departure</div>
+        <div class="recent-five-view" onclick="location.href='recent-arrival-departures'">
+          <div class="recent-nth">
+            <div class="name">Weee</div>
+            <div class="arrive-depart">Departed at</div>
+            <div class="time">12:23:34</div>
+          </div>
+          <div class="recent-nth">
+            <div class="name">Weee</div>
+            <div class="arrive-depart">Departed at</div>
+            <div class="time">12:23:34</div>
+          </div>
+          <div class="recent-nth">
+            <div class="name">Weee</div>
+            <div class="arrive-depart">Departed at</div>
+            <div class="time">12:23:34</div>
+          </div>
+          <div class="recent-nth">
+            <div class="name">Weee</div>
+            <div class="arrive-depart">Departed at</div>
+            <div class="time">12:23:34</div>
+          </div>
+        </div>
+        <div class="student-overoll-shortcut">
+          {% for i in myList %}
+          <div class="student-overoll-shortcut-inner {{i}}" onclick="location.href='checked/{{i}}'">
+            <img src="../static/images/pfp/{{i}}_pfp.png" alt="" />
+            <p>{{i}}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="mobile1-content-area">
+      <h1 style="text-align: center; margin-bottom: 100px">This kind of Tab is Not supported yet</h1>
+      <h2 style="text-align: center">buy 12.9inch iPad or donate ron for fast support</h2>
+    </div>
+    <div class="mobile-content-area">
+      <h1>phone</h1>
+    </div>
+    <div class="laptop-content-area">
+      <h1>macbook</h1>
+    </div>
+    <script src="../static/js/handleClock.js"></script>
+    <script src="../static/js/handleCheckArrival.js"></script>
+  </body>
+</html>
