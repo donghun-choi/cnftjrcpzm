@@ -1,7 +1,12 @@
 from flask import Flask, render_template, request
 import pandas as pd
 import datetime as dt
-import os.path
+import pymongo
+
+connect_to = pymongo.MongoClient("localhost",27017) # 로컬에서 열린 몽고디비 연결하기
+targetDB = connect_to.new_Db # 몽고디비 안에 내가 원하는 디비 선택
+collection = targetDB.members # 멤버라는 컬렉션에 연결
+
 app = Flask(__name__)
 
 PORT = 5000
@@ -16,9 +21,10 @@ def index():
 
 
 @app.route("/checked/<name>", methods=['GET'])
-def ooaaa(name):
+def checkedName(name):
     CURRENT_TIME = str(dt.datetime.now().hour)+':'+str(dt.datetime.now().minute)+':'+str(dt.datetime.now().second)
-
+    data = {"name":name,"time":CURRENT_TIME}
+    collection.insert_one(data) # 데이터 추가
     return render_template("checked.html", name=name,time = CURRENT_TIME)
 
     

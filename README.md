@@ -24,3 +24,6 @@ noah
 max
 Ron
 tw
+
+HOW TO INSTALL ALL PACKAGES AT ALL.
+pip3 install -r requirements.txt
