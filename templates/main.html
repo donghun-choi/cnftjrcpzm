@@ -4,11 +4,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- pwa apple -->
-    <!-- <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="메인" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> -->
-    <!-- <link rel="apple-touch-icon" href="../static/icons/icon.png" /> -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="../static/icons/icon.png" />
     <!-- PWA android is not supporting currently-->
     <link rel="stylesheet" href="../static/css/common.css" />
     <link rel="stylesheet" href="../static/css/ipad.css" />
@@ -20,8 +20,8 @@
     <div class="ipad-content-area">
       <div class="welcome-and-clock">
         <div class="welcome-box">
-          Welcome <br />
-          {{userName}}
+          Welcome, <br />
+          <i>{{userName}}</i>
         </div>
         <div class="clock">
           <div class="hand hour-hand"></div>
@@ -33,33 +33,20 @@
       <div class="resent-five">
         <div class="recent-container">Recent 5 Arrivals / Departure</div>
         <div class="recent-five-view" onclick="location.href='recent-arrival-departures'">
+          {% for i in range(5)%}
           <div class="recent-nth">
             <div class="name">Weee</div>
             <div class="arrive-depart">Departed at</div>
             <div class="time">12:23:34</div>
           </div>
-          <div class="recent-nth">
-            <div class="name">Weee</div>
-            <div class="arrive-depart">Departed at</div>
-            <div class="time">12:23:34</div>
-          </div>
-          <div class="recent-nth">
-            <div class="name">Weee</div>
-            <div class="arrive-depart">Departed at</div>
-            <div class="time">12:23:34</div>
-          </div>
-          <div class="recent-nth">
-            <div class="name">Weee</div>
-            <div class="arrive-depart">Departed at</div>
-            <div class="time">12:23:34</div>
-          </div>
+          {% endfor %}
         </div>
         <div class="student-overoll-shortcut">
           {% for i in StudentList %}
-          <div class="student-overoll-shortcut-inner {{i}}" onclick="location.href='checked/{{i}}'">
+          <button class="student-overoll-shortcut-inner" onclick="location.href='/{{i}}'">
             <img src="../static/images/pfp/{{i}}_pfp.png" alt="" />
             <p>{{i}}</p>
-          </div>
+          </button>
           {% endfor %}
         </div>
       </div>
