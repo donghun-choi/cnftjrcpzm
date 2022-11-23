@@ -3,11 +3,11 @@ import pandas as pd
 import datetime as dt
 import pymongo
 
-TODAY = str(dt.datetime.now().month)+str(dt.datetime.now().day)
+TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
 print(TODAY)
-connect_to = pymongo.MongoClient("localhost",27017) # 로컬에서 열린 몽고디비 연결하기
-targetDB = connect_to.wms_shit # 몽고디비 안에 내가 원하는 디비 선택
-TODAYS_DATA = targetDB.TODAY # 멤버라는 컬렉션에 연결
+client = pymongo.MongoClient("localhost",27017) # 로컬에서 열린 몽고디비 연결하기
+targetDB = client.wms # 몽고디비 안에 내가 원하는 디비 선택
+TODAYS_DATA = targetDB[TODAY] # 멤버라는 컬렉션에 연결 
 
 app = Flask(__name__)
 
@@ -16,7 +16,6 @@ PORT = 12342
 # PORT = 5001 home
 
 
-today = str(dt.datetime.now().month)+str(dt.datetime.now().day)
 
 names = [
 "alex","alice","aylin","ch","clara","henry",
@@ -29,8 +28,6 @@ def main():
 
 @app.route('/recent-arrival-departures')
 def recent_arrival_departures():
-    weee=TODAYS_DATA.find({})
-    print(weee)
     return render_template('overoll.html')
     
 
@@ -49,7 +46,10 @@ def checkedName(name):
 @app.route('/overoll')
 def overoll():
     return render_template('overoll.html', studentName ='ron')
-    
+
+@app.errorhandler(503)
+def server_error(e):
+    print('server_error')
 
 @app.errorhandler(404)
 def page_not_found(error):
