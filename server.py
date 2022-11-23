@@ -4,8 +4,10 @@ import datetime as dt
 import pymongo
 
 TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
-print(TODAY)
-client = pymongo.MongoClient("localhost",27017) # 로컬에서 열린 몽고디비 연결하기
+
+# client = pymongo.MongoClient("localhost",27017) # 로컬에서 열린 몽고디비 연결하기
+
+client = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority") # 원격
 targetDB = client.wms # 몽고디비 안에 내가 원하는 디비 선택
 TODAYS_DATA = targetDB[TODAY] # 멤버라는 컬렉션에 연결 
 
@@ -24,6 +26,7 @@ names = [
 
 @app.route('/',methods=['POST',"GET"])
 def main():
+    TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
     return render_template('main.html', StudentList = names,userName = "UserName")
 
 @app.route('/recent-arrival-departures')
@@ -33,9 +36,9 @@ def recent_arrival_departures():
 
 @app.route("/<name>", methods=['GET'])
 def checkedName(name):
-    
-
+    TODAYS_DATA = targetDB[TODAY] # 멤버라는 컬렉션에 연결 
     CURRENT_TIME = str(dt.datetime.now().hour)+':'+str(dt.datetime.now().minute)+':'+str(dt.datetime.now().second)
+    print(TODAY)
     data = {"name":name,"time":CURRENT_TIME}
     TODAYS_DATA.insert_one(data) # 데이터 추가
 
