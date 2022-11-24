@@ -12,23 +12,37 @@ targetDB = client.wms # 몽고디비 안에 내가 원하는 디비 선택
 TODAYS_DATA = targetDB[TODAY] # 멤버라는 컬렉션에 연결 
 
 app = Flask(__name__)
+app.secret_key = "My key"
 
 # PORT = 12342 wms
 PORT = 12342
 # PORT = 5001 home
 
-
-
 names = [
-"alex","alice","aylin","ch","clara","henry",
-"j","nathan","noah","max","Ron","tw"]
+"alex","alice","aylin","ch","clara","henry",    
+"j","nathan","noah","max","ron","tw"]
 
 
 @app.route('/',methods=['POST',"GET"])
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
+    # if 'id' in session:
+    #     id = session['id']
+    #     flash("weeee")
     return render_template('main.html', StudentList = names,userName = "UserName")
-
+    # else:
+    #     flash('login plz')
+    #     return render_template('login.html')
+    
+app.route('login',methods = ['POST','GET'])
+# def login():
+#     if request.methods == 'POST':
+#         session['userName'] = request.form['username']
+#         return redirect(url_for('main'))
+#     else:
+#         return render_template('login.html')
+    
+    
 @app.route('/recent-arrival-departures')
 def recent_arrival_departures():
     return render_template('overoll.html')
@@ -41,14 +55,8 @@ def checkedName(name):
     print(TODAY)
     data = {"name":name,"time":CURRENT_TIME}
     TODAYS_DATA.insert_one(data) # 데이터 추가
-
     return redirect(url_for('main'))
 
-
-
-@app.route('/overoll')
-def overoll():
-    return render_template('overoll.html', studentName ='ron')
 
 @app.errorhandler(503)
 def server_error(e):
@@ -60,6 +68,6 @@ def page_not_found(error):
   
 
 if __name__ == "__main__":
-
+    
     # app.run(port=PORT)
-    app.run(host="0.0.0.0", port=PORT, threaded=True, debug=True)    
+    app.run(host="0.0.0.0", port=PORT, threaded=True, debug=True)
