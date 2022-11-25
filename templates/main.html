@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -44,7 +45,7 @@
         </div>
         <div class="student-overoll-shortcut">
           {% for i in StudentList %}
-          <button class="student-overoll-shortcut-inner" onclick="location.href='/{{i}}'">
+          <button class="student-overoll-shortcut-inner moveonclick" onclick="location.href='/{{i}}'">
             <img src="../static/images/pfp/{{i}}_pfp.png" alt="" />
             <p>{{i}}</p>
           </button>
@@ -76,9 +77,10 @@
     </div>
 
     <div class="laptop-content-area">
-      <h1>macbook</h1>
+      <h1>laptop</h1>
     </div>
     <script src="../static/js/handleClock.js"></script>
     <script src="../static/js/handleCheckArrival.js"></script>
+    <script src="../static/js/handleClick.js"></script>
   </body>
 </html>
