@@ -12,6 +12,7 @@
     <!-- PWA android is not supporting currently-->
     <link rel="stylesheet" href="../static/css/common.css" />
     <link rel="stylesheet" href="../static/css/ipad.css" />
+    <link rel="stylesheet" href="../static/css/mobile.css" />
     <title>메인</title>
   </head>
   <body>
@@ -56,8 +57,24 @@
       <h2 style="text-align: center">buy 12.9inch iPad or donate ron for fast support</h2>
     </div>
     <div class="mobile-content-area">
-      <h1>phone</h1>
+      <div class="moblie-welcome-box">
+        Hi! <br />
+        <i>{{userName}}</i>
+      </div>
+      <div class="mobile-resent-five">
+        <div class="recent-container">Recent 5 Arrivals / Departure</div>
+        <div class="mobile-recent-five-view" onclick="location.href='recent-arrival-departures'">
+          {% for i in range(5)%}
+          <div class="mobile-recent-nth">
+            <div class="name">Weee</div>
+            <div class="arrive-depart">Departed at</div>
+            <div class="time">12:23:34</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
+
     <div class="laptop-content-area">
       <h1>macbook</h1>
     </div>
