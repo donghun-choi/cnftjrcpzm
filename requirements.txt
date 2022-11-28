@@ -2,3 +2,4 @@ flask
 pandas
 datetime
 pymongo
+flask_login

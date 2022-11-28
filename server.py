@@ -1,16 +1,17 @@
 from flask import *
+from flask_login import *
 import pandas as pd
 import datetime as dt
 import pymongo
 
 TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
-
+    
 # client = pymongo.MongoClient("localhost",27017) # 로컬에서 열린 몽고디비 연결하기
 
 client = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority") # 원격
 targetDB = client.wms # 몽고디비 안에 내가 원하는 디비 선택
 TODAYS_DATA = targetDB[TODAY] # 멤버라는 컬렉션에 연결 
-
+IDPW = targetDB["회원 데이터베이스"]
 app = Flask(__name__)
 
 # PORT = 12342 wms
@@ -30,16 +31,17 @@ def main():
     # 지우면 병신인증.
     return render_template('main.html', StudentList = names,userName = "UserName")
 
-    
+
 @app.route('/login',methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
         id = request.form['id']
         password = request.form['password']
-        
         print(id)
         print(password)
-
+        IDPW.find()
+        idspw = list(IDPW.find({'userName':id}, {'_id':False}))
+        print(idspw)
     return render_template('login.html')
     
     

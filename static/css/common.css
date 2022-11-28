@@ -300,8 +300,3 @@ table {
 body {
   overflow: hidden;
 }
-
-#moveoncolorchange {
-  transition-property: background-color;
-  transition-duration: 0.2s;
-}
