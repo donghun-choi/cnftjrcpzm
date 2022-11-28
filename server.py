@@ -12,11 +12,11 @@ targetDB = client.wms # 몽고디비 안에 내가 원하는 디비 선택
 TODAYS_DATA = targetDB[TODAY] # 멤버라는 컬렉션에 연결 
 
 app = Flask(__name__)
-app.secret_key = "My key"
 
 # PORT = 12342 wms
 PORT = 12342
-# PORT = 5001 home
+# PORT = 5001 home 
+# 5000번 포트는 AirPlay가 쓴다... 그걸로 지정하지마...
 
 names = [
 "alex","alice","aylin","ch","clara","henry",    
@@ -26,22 +26,27 @@ names = [
 @app.route('/',methods=['POST',"GET"])
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
+    # TODAY 여기서 안쓴다고 지우지 말것. 데이터베이스 업데이트 하는 용도로 쓰임. 자동으로 날자 업데이트된 데이터베이스 생성하는 용도.
+    # 지우면 병신인증.
     return render_template('main.html', StudentList = names,userName = "UserName")
 
     
 @app.route('/login',methods = ['GET', 'POST'])
 def login():
-    id = request.form['id']
-    password = request.form['password']
-    print(id)
-    print(password)
+    if request.method == 'POST':
+        id = request.form['id']
+        password = request.form['password']
+        
+        print(id)
+        print(password)
+
     return render_template('login.html')
     
     
 @app.route('/recent-arrival-departures')
 def recent_arrival_departures():
     return render_template('overoll.html')
-    
+
 
 @app.route("/<name>", methods=['GET'])
 def checkedName(name):
