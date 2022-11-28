@@ -26,21 +26,16 @@ names = [
 @app.route('/',methods=['POST',"GET"])
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
-    # if 'id' in session:
-    #     id = session['id']
-    #     flash("weeee")
     return render_template('main.html', StudentList = names,userName = "UserName")
-    # else:
-    #     flash('login plz')
-    #     return render_template('login.html')
+
     
-app.route('login',methods = ['POST','GET'])
-# def login():
-#     if request.methods == 'POST':
-#         session['userName'] = request.form['username']
-#         return redirect(url_for('main'))
-#     else:
-#         return render_template('login.html')
+@app.route('/login',methods = ['GET', 'POST'])
+def login():
+    id = request.form['id']
+    password = request.form['password']
+    print(id)
+    print(password)
+    return render_template('login.html')
     
     
 @app.route('/recent-arrival-departures')
