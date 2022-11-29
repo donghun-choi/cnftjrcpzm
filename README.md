@@ -34,3 +34,5 @@ pip3 install -r requirements.txt
             print("login success")
             return render_template('main.html', StudentList = names,userName = id)
 
+"alex","alice","aylin","ch","clara","henry",  
+"j","nathan","noah","max","ron","tw"

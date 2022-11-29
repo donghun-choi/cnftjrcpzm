@@ -1,46 +1,67 @@
 from flask import *
-from flask_login import *
 import datetime as dt
 import pymongo
+import pandas as pd
+
+def login1():
+    if 'user' in session:
+        return True
+    return False
+
+
 
 TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
-client = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority") # 원격
+
+mongodb_href = open('./mongodbkey.txt', 'r')
+client = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority")
 targetDB = client.wms
 TODAYS_DATA = targetDB[TODAY]
 IDPW = targetDB["회원 데이터베이스"]
 app = Flask(__name__)
-PORT = 12342
-names = [
-"alex","alice","aylin","ch","clara","henry",    
-"j","nathan","noah","max","ron","tw"]
+secret_key = open('./key.txt','r')
+key = secret_key.read()
+app.config['SECRET_KEY'] = key
+app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=15)
 
+PORT = 12342
+names = ['me','you']
+
+@app.route("/logout")
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('main'))
 
 @app.route('/',methods=['POST',"GET"])
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
-    return redirect("/login")
-    return render_template('main.html', StudentList = names,userName = "UserName")
-
-
-@app.route('/login',methods = ['GET', 'POST'])
-def login():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        if login1():
+            return render_template('main.html',StudentList = names, userName = session['user'])
+        return render_template('login.html')
+            
+    elif request.method == 'POST':
         username_recive = request.form['userName']
         password = request.form['password']
-        print(username_recive)
-        print(password)
+        if not (username_recive and password):
+            flash("모두 입력해주세요")
+            return render_template('login.html')
+        
         result = IDPW.find_one({'password':password},{'userName':username_recive})
         print(result)
-        
         if result is not None:
-            print('login')
+            session['user'] = username_recive
+            return render_template('main.html', StudentList = names,userName = username_recive)
+        else:
+            flash("비밀번호나 ID를 다시 한번 확인해주세요")
+            return render_template('login.html')
+    
 
-    return render_template('login.html')
-    
-    
 @app.route('/recent-arrival-departures')
 def recent_arrival_departures():
-    return render_template('overoll.html')
+    if login1():
+        return render_template('overoll.html',userName = session['user'])
+    else:
+        return redirect(url_for('main'))
 
 
 @app.route("/<name>", methods=['GET'])

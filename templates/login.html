@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <script>
+      alert("{{messages[-1]}}");
+    </script>
+    {% endif %} {% endwith %}
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,10 +21,10 @@
   <body>
     <div class="login-container">
       <form method="post">
-        <label for="userName">ID:</label>
+        <strong><label for="userName">ID:</label></strong>
         <input type="text" name="userName" />
         <br />
-        <label for="password">password:</label>
+        <strong><label for="password">password:</label></strong>
         <input type="password" name="password" />
         <br />
         <button type="submit" class="button" role="button">확인</button>

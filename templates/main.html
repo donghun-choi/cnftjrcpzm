@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <script>
+      alert("{{messages[-1]}}");
+    </script>
+    {% endif %} {% endwith %}
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -32,6 +37,7 @@
           <div class="timetext">12:12:12</div>
         </div>
       </div>
+      <a href="./logout"><button>Logout</button></a>
       <div class="resent-five">
         <div class="recent-container">Recent 5 Arrivals / Departure</div>
         <div class="recent-five-view" onclick="location.href='recent-arrival-departures'">
