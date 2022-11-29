@@ -27,3 +27,10 @@ tw
 
 HOW TO INSTALL ALL PACKAGES AT ALL.
 pip3 install -r requirements.txt
+
+        if idExt == [] and passwordExt ==[]:
+            print("pw or id incorrect")
+        elif idExt == passwordExt:
+            print("login success")
+            return render_template('main.html', StudentList = names,userName = id)
+
