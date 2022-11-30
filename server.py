@@ -9,18 +9,14 @@ def login1():
     return False
 
 
-
 TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
 
-mongodb_href = open('./mongodbkey.txt', 'r')
 client = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority")
 targetDB = client.wms
 TODAYS_DATA = targetDB[TODAY]
 IDPW = targetDB["회원 데이터베이스"]
 app = Flask(__name__)
-secret_key = open('./key.txt','r')
-key = secret_key.read()
-app.config['SECRET_KEY'] = key
+app.config['SECRET_KEY'] = f'asdfjrjh2rhhg;ah;h3lhtlqlhlk4r454blk23blkwbrlhb4lh2442j5h2'
 app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=15)
 
 PORT = 12342
