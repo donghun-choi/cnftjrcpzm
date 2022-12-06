@@ -199,6 +199,7 @@ button {
   font-family: Montserrat;
   vertical-align: baseline;
   white-space: nowrap;
+  transition: all 1s;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -272,8 +273,7 @@ table {
 }
 
 /* tab */
-/* @media all and (min-width: 864px) and (max-width: 1200px) { 임시로 컴퓨터 접속 가능하게 비활성화.*/
-@media all and (min-width: 864px) {
+@media all and (min-width: 864px) and (max-width: 1200px) {
   .ipad-content-area {
     display: block;
   }
@@ -284,8 +284,7 @@ table {
   }
 }
 
-/* computer */
-/* @media all and (min-width: 1200px) {
+@media all and (min-width: 1200px) {
   .laptop-content-area {
     display: block;
   }
@@ -294,9 +293,8 @@ table {
   .mobile1-content-area {
     display: none;
   }
-} 
-임시로 컴퓨터 접속 가능하게 비활성화.
-*/
+}
+
 body {
   overflow: hidden;
 }

@@ -1,9 +1,8 @@
 from flask import *
 import datetime as dt
 import pymongo
-import pandas as pd
 
-def login1():
+def login():
     if 'user' in session:
         return True
     return False
@@ -17,10 +16,18 @@ TODAYS_DATA = targetDB[TODAY]
 IDPW = targetDB["회원 데이터베이스"]
 app = Flask(__name__)
 app.config['SECRET_KEY'] = f'asdfjrjh2rhhg;ah;h3lhtlqlhlk4r454blk23blkwbrlhb4lh2442j5h2'
-app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=15)
+app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=60)
+
+
+@app.before_request
+def limit_remote_addr():
+    if '141.' in str(request.remote_addr): # West Taiwan
+        abort(403,"TAIWAN IS COUNTRY")  # GET the FUCK out Tlqkf hahaha
+
 
 PORT = 12342
-names = ['me','you']
+names = ["alex","alice","aylin","ch","clara","henry",  
+"j","nathan","noah","max","ron","tw"]
 
 @app.route("/logout")
 def logout():
@@ -31,7 +38,7 @@ def logout():
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
     if request.method == 'GET':
-        if login1():
+        if login():
             return render_template('main.html',StudentList = names, userName = session['user'])
         return render_template('login.html')
             
@@ -39,7 +46,6 @@ def main():
         username_recive = request.form['userName']
         password = request.form['password']
         if not (username_recive and password):
-            flash("모두 입력해주세요")
             return render_template('login.html')
         
         result = IDPW.find_one({'password':password},{'userName':username_recive})
@@ -50,34 +56,40 @@ def main():
         else:
             flash("비밀번호나 ID를 다시 한번 확인해주세요")
             return render_template('login.html')
-    
+        
 
-@app.route('/recent-arrival-departures')
-def recent_arrival_departures():
-    if login1():
-        return render_template('overoll.html',userName = session['user'])
-    else:
-        return redirect(url_for('main'))
+# @app.route('/recent-arrival-departures')
+# def recent_arrival_departures():
+#     if login():
+#         return render_template('overoll.html',userName = session['user'])
+#     else:
+#         return redirect(url_for('main'))
 
 
 @app.route("/<name>", methods=['GET'])
 def checkedName(name):
-    TODAYS_DATA = targetDB[TODAY]
-    CURRENT_TIME = str(dt.datetime.now().hour)+':'+str(dt.datetime.now().minute)+':'+str(dt.datetime.now().second)
-    print(TODAY)
-    data = {"name":name,"time":CURRENT_TIME}
-    TODAYS_DATA.insert_one(data)
-    return redirect(url_for('main'))
+    if login():
+        now = dt.datetime.now()
+        TODAYS_DATA = targetDB[TODAY]
+        CURRENT_TIME = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
+        print(TODAY)
+        data = {"name":name,"time":CURRENT_TIME,"checker":session['user']}
+        print(data)
+        TODAYS_DATA.insert_one(data)
+        return redirect(url_for('main'))
+    else:
+        return redirect(url_for('main'))
 
 
 @app.errorhandler(503)
 def server_error(e):
     print('server_error 503')
 
+
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html')
-  
+
 
 PORT = 12342
 if __name__ == "__main__":
