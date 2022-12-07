@@ -7,9 +7,9 @@ recent_five.addEventListener("click", enable);
 close_btn_for_recent.addEventListener("click", disable);
 
 function enable() {
+  recent_five.style.transitionDuration = "1s";
   recent_five.style.position = "fixed";
   recent_five.style.height = "90%";
-  recent_five.style.width = "92%";
   recent_five.style.top = "48px";
   recent_five.style.left = "50%";
   recent_five.style.transform = "translate(-50%)";
@@ -24,9 +24,14 @@ function enable() {
   close_btn_for_recent.style.display = "block";
   close_btn_for_recent.style.position = "fixed";
   close_btn_for_recent.style.zIndex = "9999999";
+  setTimeout(handleObjWidth, 1000);
+}
+function handleObjWidth() {
+  recent_five.style.width = "92%";
 }
 
 function disable() {
+  recent_five.style.transitionDuration = " 1s";
   recent_five.style.position = "static";
   recent_five.style.height = "";
   recent_five.style.width = "";
@@ -57,10 +62,8 @@ function saveTheme(theme) {
   localStorage.setItem("theme", theme);
 }
 
-const colorScheme = document.querySelector('meta[name="color-scheme"]');
 function applyTheme(theme) {
   document.body.className = theme;
-  colorScheme.content = theme;
 }
 
 function rotateTheme(theme) {

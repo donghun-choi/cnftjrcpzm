@@ -199,7 +199,6 @@ button {
   font-family: Montserrat;
   vertical-align: baseline;
   white-space: nowrap;
-  transition: all 1s;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -297,4 +296,7 @@ table {
 
 body {
   overflow: hidden;
+}
+button {
+  cursor: pointer;
 }

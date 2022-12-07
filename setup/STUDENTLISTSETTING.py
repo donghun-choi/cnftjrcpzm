@@ -13,11 +13,9 @@ collection = db.student_list
 
 list1 = ["alex","alice","aylin","ch","clara","henry","j","nathan","noah","max","Ron","tw"] #학생 여기다 다 넣고 실행하면 됨.
 # print (list1)
-# for i in range(len(list1)):
-data = {
-    "name":list1[3],
-}
-collection.insert_one(data) # 데이터 추가
+for i in range(len(list1)):
+    data = {"name":list1[i],}
+    collection.insert_one(data) # 데이터 추가
 
-# a = collection.find_one('alex') #
-# print (a)
+a = collection.find_one({"name":"alex"}) #
+print (a)

@@ -9,7 +9,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="color-scheme" content="light dark" />
+    <!-- apple 상단바 애미 ㅋㅋㅋㅋㅋㅋ -->
+    <!-- <meta name="color-scheme" content="dark" /> -->
     <!-- pwa apple -->
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="출석체크" />
@@ -32,7 +33,19 @@
           <i>{{userName}}</i>
           <br />
           <div class="memu-area">
-            <button class="button" onClick="window.location.reload()">새로고침</button>
+            <button style="height: 24px; width: 24px; display: flex; justify-content: center; align-items: center" class="button" onClick="window.location.reload()">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M10 19L9.64645 18.6464L9.29289 19L9.64645 19.3536L10 19ZM13.6464 14.6464L9.64645 18.6464L10.3536 19.3536L14.3536 15.3536L13.6464 14.6464ZM9.64645 19.3536L13.6464 23.3536L14.3536 22.6464L10.3536 18.6464L9.64645 19.3536Z"
+                  fill="#222222"
+                />
+                <path
+                  d="M5.93782 15.5C5.14475 14.1264 4.84171 12.5241 5.07833 10.9557C5.31495 9.38734 6.07722 7.94581 7.24024 6.86729C8.40327 5.78877 9.8981 5.13721 11.4798 5.01935C13.0616 4.90149 14.6365 5.32432 15.9465 6.21856C17.2565 7.1128 18.224 8.42544 18.6905 9.94144C19.1569 11.4574 19.0947 13.0869 18.5139 14.5629C17.9332 16.0389 16.8684 17.2739 15.494 18.0656C14.1196 18.8573 12.517 19.1588 10.9489 18.9206"
+                  stroke="#222222"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
             <button onclick="location.href = './logout'" style="color: red">Logout</button>
             <span id="theme" style="display: none">light</span><button id="theme-toggle">Night Mode</button>
             <button>추가될 기능</button>
