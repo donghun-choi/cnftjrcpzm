@@ -1,6 +1,6 @@
 const close_btn_for_recent = document.getElementsByClassName("close_btn_for_recent")[0];
-const recent_five = document.getElementsByClassName("recent-five")[0];
-const recent_five_view = document.getElementsByClassName("recent-five-view")[0];
+const recent_five = document.getElementsByClassName("recent")[0];
+const recent_five_view = document.getElementsByClassName("recent-view")[0];
 const recent_five_container = document.getElementsByClassName("recent-container")[0];
 
 recent_five.addEventListener("click", enable);
@@ -15,7 +15,7 @@ function enable() {
   recent_five.style.transform = "translate(-50%)";
   recent_five.style.zIndex = "999999";
 
-  recent_five_view.style.boxShadow = "0 0 1200px black";
+  recent_five_view.style.boxShadow = "0 0 120px 12px black";
   recent_five_view.style.borderRadius = "24px 24px 24px 24px";
 
   // container style
@@ -64,12 +64,17 @@ function saveTheme(theme) {
 
 function applyTheme(theme) {
   document.body.className = theme;
+  if (theme == "light") {
+    document.getElementById("themeIMG").src = "../static/images/svg/sun.svg";
+  } else document.getElementById("themeIMG").src = "../static/images/svg/moon.svg";
 }
 
 function rotateTheme(theme) {
   if (theme === "light") {
+    document.getElementById("themeIMG").src = "../static/images/svg/sun.svg";
     return "dark";
   }
+  document.getElementById("themeIMG").src = "../static/images/svg/moon.svg";
   return "light";
 }
 
@@ -78,6 +83,7 @@ const themeToggler = document.getElementById("theme-toggle");
 
 let theme = getTheme();
 applyTheme(theme);
+
 themeDisplay.innerText = theme;
 
 themeToggler.onclick = () => {

@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- apple 상단바 애미 ㅋㅋㅋㅋㅋㅋ -->
-    <!-- <meta name="color-scheme" content="dark" /> -->
+    <meta name="color-scheme" content="dark" />
     <!-- pwa apple -->
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="출석체크" />
@@ -19,21 +19,21 @@
     <link rel="apple-touch-icon" href="../static/icons/icon.png" />
     <!-- PWA android is not supporting currently-->
     <link rel="stylesheet" href="../static/css/common.css" />
-    <link rel="stylesheet" href="../static/css/ipad.css" />
-    <link rel="stylesheet" href="../static/css/mobile.css" />
+    <link rel="stylesheet" href="../static/css/main.css" />
     <title>메인</title>
   </head>
   <body>
     <noscript>Please Enable JS.</noscript>
     <noscript>자바스크립트를 활성화해주시기 바랍니다.</noscript>
-    <div class="ipad-content-area">
+    <div class="main-content-area">
       <div class="welcome-and-clock">
         <div class="welcome-box">
-          Welcome, <br />
+          <span id="welcome">Welcome,</span>
+          <span id="hi">hi,</span>
           <i>{{userName}}</i>
           <br />
           <div class="memu-area">
-            <button style="height: 24px; width: 24px; display: flex; justify-content: center; align-items: center" class="button" onClick="window.location.reload()">
+            <button onClick="window.location.reload()">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M10 19L9.64645 18.6464L9.29289 19L9.64645 19.3536L10 19ZM13.6464 14.6464L9.64645 18.6464L10.3536 19.3536L14.3536 15.3536L13.6464 14.6464ZM9.64645 19.3536L13.6464 23.3536L14.3536 22.6464L10.3536 18.6464L9.64645 19.3536Z"
@@ -47,7 +47,8 @@
               </svg>
             </button>
             <button onclick="location.href = './logout'" style="color: red">Logout</button>
-            <span id="theme" style="display: none">light</span><button id="theme-toggle">Night Mode</button>
+            <span id="theme" style="display: none">light</span>
+            <button id="theme-toggle"><img id="themeIMG" src="" alt="" /></button>
             <button>추가될 기능</button>
           </div>
         </div>
@@ -66,9 +67,9 @@
           />
         </svg>
       </button>
-      <div class="recent-five">
+      <div class="recent">
         <div class="recent-container">Recent 5 Arrivals / Departure</div>
-        <div class="recent-five-view">
+        <div class="recent-view">
           {% for i in range(500)%}
           <div class="recent-nth">
             <div class="name">Weee</div>
@@ -80,36 +81,13 @@
       </div>
       <div class="student-overoll-shortcut">
         {% for i in StudentList %}
-        <button class="student-overoll-shortcut-inner" id="moveoncolorchange" onclick="alert('{{i}} 출석체크 완료');location.href= '/{{i}}'">
+        <button class="student-overoll-shortcut-inner" onclick="alert('{{i}} 출석체크 완료');location.href= '/{{i}}'">
           <img src="../static/images/pfp/{{i}}_pfp.png" alt="" />
           <p>{{i}}</p>
         </button>
         {% endfor %}
       </div>
     </div>
-    <div class="mobile1-content-area">
-      <h1 style="text-align: center; margin-bottom: 100px">This kind of Tab is Not supported yet</h1>
-      <h2 style="text-align: center">buy 12.9inch iPad or donate ron for fast support</h2>
-    </div>
-    <div class="mobile-content-area">
-      <div class="moblie-welcome-box">
-        Hi! <br />
-        <i>{{userName}}</i>
-      </div>
-      <div class="mobile-resent-five">
-        <div class="recent-container">Recent 5 Arrivals / Departure</div>
-        <div class="mobile-recent-five-view" onclick="location.href='recent-arrival-departures'">
-          {% for i in range(5)%}
-          <div class="mobile-recent-nth">
-            <div class="name">Weee</div>
-            <div class="arrive-depart">Departed at</div>
-            <div class="time">12:23:34</div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
     <div class="laptop-content-area">
       <h1>laptop</h1>
     </div>

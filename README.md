@@ -36,3 +36,6 @@ pip3 install -r requirements.txt
 
 "alex","alice","aylin","ch","clara","henry",  
 "j","nathan","noah","max","ron","tw"
+
+const sun = "https://www.uplooder.net/img/image/55/7aa9993fc291bc170abea048589896cf/sun.svg";
+const moon = "https://www.uplooder.net/img/image/2/addf703a24a12d030968858e0879b11e/moon.svg"
