@@ -249,25 +249,6 @@ table {
   display: flex;
 }
 
-/* tab */
-@media all and (min-width: 600px) and (max-width: 1200px) {
-  .ipad-content-area {
-    display: block;
-  }
-  .laptop-content-area {
-    display: none;
-  }
-}
-
-@media all and (min-width: 1200px) {
-  .laptop-content-area {
-    display: block;
-  }
-  .ipad-content-area {
-    display: none;
-  }
-}
-
 body {
   overflow: hidden;
 }

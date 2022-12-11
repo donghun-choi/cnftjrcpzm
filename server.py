@@ -16,11 +16,11 @@ wmsDB = mongoDB_SERVER.wms
 TODAYS_DATA_FORM_DB = wmsDB[TODAY]
 STUDENTS_LIST_FROM_DB = wmsDB.student_list
 
-stdl = STUDENTS_LIST_FROM_DB.find()
+STUDENTS_LIST_FROM_DB = STUDENTS_LIST_FROM_DB.find()
 
 student_list = []
 
-for x in stdl:
+for x in STUDENTS_LIST_FROM_DB:
     student_list.append(x['name'])
 
 student_list = set(student_list)

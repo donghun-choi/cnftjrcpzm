@@ -72,9 +72,11 @@ function applyTheme(theme) {
 function rotateTheme(theme) {
   if (theme === "light") {
     document.getElementById("themeIMG").src = "../static/images/svg/sun.svg";
+    document.getElementById("refreshBtn").src = "../static/images/svg/reload_dark.svg";
     return "dark";
   }
   document.getElementById("themeIMG").src = "../static/images/svg/moon.svg";
+  document.getElementById("refreshBtn").src = "../static/images/svg/reload_light.svg";
   return "light";
 }
 

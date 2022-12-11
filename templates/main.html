@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <!-- script load -->
+    <script defer src="../static/js/handleClock.js"></script>
+    <script defer src="../static/js/handleCheckArrival.js"></script>
+    <script defer src="../static/js/handleClick.js"></script>
+
     {% with messages = get_flashed_messages() %} {% if messages %}
     <script>
       alert("{{messages[-1]}}");
@@ -34,17 +39,7 @@
           <br />
           <div class="memu-area">
             <button onClick="window.location.reload()">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M10 19L9.64645 18.6464L9.29289 19L9.64645 19.3536L10 19ZM13.6464 14.6464L9.64645 18.6464L10.3536 19.3536L14.3536 15.3536L13.6464 14.6464ZM9.64645 19.3536L13.6464 23.3536L14.3536 22.6464L10.3536 18.6464L9.64645 19.3536Z"
-                  fill="#222222"
-                />
-                <path
-                  d="M5.93782 15.5C5.14475 14.1264 4.84171 12.5241 5.07833 10.9557C5.31495 9.38734 6.07722 7.94581 7.24024 6.86729C8.40327 5.78877 9.8981 5.13721 11.4798 5.01935C13.0616 4.90149 14.6365 5.32432 15.9465 6.21856C17.2565 7.1128 18.224 8.42544 18.6905 9.94144C19.1569 11.4574 19.0947 13.0869 18.5139 14.5629C17.9332 16.0389 16.8684 17.2739 15.494 18.0656C14.1196 18.8573 12.517 19.1588 10.9489 18.9206"
-                  stroke="#222222"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <img id="refreshBtn" src="../static/images/svg/reload_light.svg" alt="" />
             </button>
             <button onclick="location.href = './logout'" style="color: red">Logout</button>
             <span id="theme" style="display: none">light</span>
@@ -60,15 +55,10 @@
         </div>
       </div>
       <button class="close_btn_for_recent">
-        <svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM5.35355 4.64645C5.15829 4.45118 4.84171 4.45118 4.64645 4.64645C4.45118 4.84171 4.45118 5.15829 4.64645 5.35355L7.29289 8L4.64645 10.6464C4.45118 10.8417 4.45118 11.1583 4.64645 11.3536C4.84171 11.5488 5.15829 11.5488 5.35355 11.3536L8 8.70711L10.6464 11.3536C10.8417 11.5488 11.1583 11.5488 11.3536 11.3536C11.5488 11.1583 11.5488 10.8417 11.3536 10.6464L8.70711 8L11.3536 5.35355C11.5488 5.15829 11.5488 4.84171 11.3536 4.64645C11.1583 4.45118 10.8417 4.45118 10.6464 4.64645L8 7.29289L5.35355 4.64645Z"
-            fill="black"
-          />
-        </svg>
+        <img src="../static/images/svg/close.svg" alt="" />
       </button>
       <div class="recent">
-        <div class="recent-container">Recent 5 Arrivals / Departure</div>
+        <div class="recent-container">Recent Arrivals / Departure</div>
         <div class="recent-view">
           {% for i in range(500)%}
           <div class="recent-nth">
@@ -88,11 +78,5 @@
         {% endfor %}
       </div>
     </div>
-    <div class="laptop-content-area">
-      <h1>laptop</h1>
-    </div>
-    <script src="../static/js/handleClock.js"></script>
-    <script src="../static/js/handleCheckArrival.js"></script>
-    <script src="../static/js/handleClick.js"></script>
   </body>
 </html>

@@ -3,5 +3,3 @@
 # .gitignore
 # /setup
 # server.py
-key.txt
-mongodbkey.txt
