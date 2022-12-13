@@ -65,11 +65,11 @@
       <div class="recent">
         <div class="recent-container">Recent Arrivals / Departure</div>
         <div class="recent-view">
-          {% for i in range(recents)%}
+          {% for i in (range(howmanyrecents)) %}
           <div class="recent-nth">
-            <div class="name">{{i}}</div>
-            <div class="arrive-depart">Departed at</div>
-            <div class="time">12:23:34</div>
+            <div class="name">{{todays_data_student[howmanyrecents-i-1]}}</div>
+            <div class="arrive-depart"><strong>checker: {{Chedker_who[howmanyrecents-i-1]}} At</strong></div>
+            <div class="time">{{todays_data_time[howmanyrecents-i-1]}}</div>
           </div>
           {% endfor %}
         </div>

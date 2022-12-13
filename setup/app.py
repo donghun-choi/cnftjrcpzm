@@ -8,13 +8,13 @@ import pymongo
 
 client = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority")
 db = client.wms
-collection = db.student_list
+collection = db['회원 데이터베이스']
 
 
-list1 = ["alex","alice","aylin","ch","clara","henry","j","nathan","noah","max","Ron","tw"] #학생 여기다 다 넣고 실행하면 됨.
+list1 = ["alex","alice","aylin","ch","clara","henry","j","nathan","noah","max","Ron","tw","anne","bebe","Luna","Rebecca","Emily","Justino","Richard","Vison","David"] #학생 여기다 다 넣고 실행하면 됨.
 # print (list1)
 for i in range(len(list1)):
-    data = {"name":list1[i],}
+    data = {"userName":list1[i],"password":"a"}
     collection.insert_one(data) # 데이터 추가
 
 a = collection.find_one({"name":"alex"}) #

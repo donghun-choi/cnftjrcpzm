@@ -41,7 +41,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=LOGOUT_TIMER)
 @app.before_request
 def limit_remote_addr():
     if '141.' in str(request.remote_addr): # West Taiwan
-        abort(403,"TAIWAN IS COUNTRY")  # GET the FUCK out Tlqkf hahaha
+        abort(403,"허가받지 않은 접근입니다. 차단당하셨을 확률이 가장 높습니다. 관리지에게 문의해주세요.")  # GET the FUCK out Tlqkf hahaha
 
 @app.route('/robots.txt')
 def robot_to_root():
@@ -59,9 +59,23 @@ def logout():
 @app.route('/',methods=['POST',"GET"])
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
+    todays_data = []
+    todays_data_student = []
+    todays_data_time = []
+    Chedker_who = []
+
+    for x in TODAYS_DATA_FORM_DB.find():
+        if not "favicon.ico" in str(x):
+            todays_data.append(x['name']);
+            todays_data_student.append(x['name']);
+            todays_data_time.append(x['time']);
+            Chedker_who.append(x['checker'])
+            
+
+    print(todays_data)
     if request.method == 'GET':
         if login():
-            return render_template('main.html',StudentList = student_list, userName = session['user'],recents = 123)
+            return render_template('main.html',StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
         return render_template('login.html')
             
     elif request.method == 'POST':
@@ -74,7 +88,7 @@ def main():
         print(result)
         if result is not None:
             session['user'] = username_recive
-            return render_template('main.html', StudentList = student_list,userName = username_recive,recents = 123)
+            return render_template('main.html',StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
         else:
             flash("비밀번호나 ID를 다시 한번 확인해주세요")
             return render_template('login.html')
