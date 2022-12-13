@@ -28,7 +28,7 @@ for x in STUDENTS_LIST_FROM_DB:
 student_list = set(student_list)
 student_list = list(student_list)
 
-print(student_list)
+print("student_list",student_list)
 
 
 
@@ -72,7 +72,7 @@ def main():
             Chedker_who.append(x['checker'])
             
 
-    print(todays_data)
+    print("todays_data",todays_data)
     if request.method == 'GET':
         if login():
             return render_template('main.html',StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
@@ -82,14 +82,16 @@ def main():
         username_recive = request.form['userName']
         password = request.form['password']
         if not (username_recive and password):
+            print("비번틀림")
             return render_template('login.html')
         
         result = IDPW.find_one({'password':password},{'userName':username_recive})
-        print(result)
+        print("result",result)
         if result is not None:
             session['user'] = username_recive
             return render_template('main.html',StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
         else:
+            print("비번틀림")
             flash("비밀번호나 ID를 다시 한번 확인해주세요")
             return render_template('login.html')
         
@@ -100,9 +102,9 @@ def checkedName(name):
         now = dt.datetime.now()
         TODAYS_DATA_FORM_DB = wmsDB[TODAY]
         CURRENT_TIME = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
-        print(TODAY)
+        print("TODAY",TODAY)
         data = {"name":name,"time":CURRENT_TIME,"checker":session['user']}
-        print(data)
+        print("data",data)
         TODAYS_DATA_FORM_DB.insert_one(data)
         return redirect(url_for('main'))
     else:
