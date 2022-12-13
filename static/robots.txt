@@ -1,0 +1,4 @@
+User-agent: Yeti
+User-agent: DuckDuckBot
+User-agent: Daum
+Disallow: /not-for-naver-and-duckduckgo-and-daum/

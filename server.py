@@ -8,6 +8,8 @@ def login():
     return False
 
 
+
+LOGOUT_TIMER = 240
 TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
 
 mongoDB_SERVER = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority")
@@ -33,13 +35,17 @@ print(student_list)
 IDPW = wmsDB["회원 데이터베이스"]
 app = Flask(__name__)
 app.config['SECRET_KEY'] = f'asdfjrjh2rhhg;ah;h3lhtlqlhlk4r454blk23blkwbrlhb4lh2442j5h2'
-app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=60)
+app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=LOGOUT_TIMER)
 
 
 @app.before_request
 def limit_remote_addr():
     if '141.' in str(request.remote_addr): # West Taiwan
         abort(403,"TAIWAN IS COUNTRY")  # GET the FUCK out Tlqkf hahaha
+
+@app.route('/robots.txt')
+def robot_to_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 
 PORT = 12342
@@ -55,7 +61,7 @@ def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
     if request.method == 'GET':
         if login():
-            return render_template('main.html',StudentList = student_list, userName = session['user'])
+            return render_template('main.html',StudentList = student_list, userName = session['user'],recents = 123)
         return render_template('login.html')
             
     elif request.method == 'POST':
@@ -68,7 +74,7 @@ def main():
         print(result)
         if result is not None:
             session['user'] = username_recive
-            return render_template('main.html', StudentList = student_list,userName = username_recive)
+            return render_template('main.html', StudentList = student_list,userName = username_recive,recents = 123)
         else:
             flash("비밀번호나 ID를 다시 한번 확인해주세요")
             return render_template('login.html')

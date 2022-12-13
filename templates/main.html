@@ -2,9 +2,9 @@
 <html lang="ko">
   <head>
     <!-- script load -->
-    <script defer src="../static/js/handleClock.js"></script>
-    <script defer src="../static/js/handleCheckArrival.js"></script>
-    <script defer src="../static/js/handleClick.js"></script>
+    <script async src="../static/js/handleClock.js"></script>
+    <script async src="../static/js/handleCheckArrival.js"></script>
+    <script async src="../static/js/handleClick.js"></script>
 
     {% with messages = get_flashed_messages() %} {% if messages %}
     <script>
@@ -13,7 +13,7 @@
     {% endif %} {% endwith %}
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <!-- apple 상단바 애미 ㅋㅋㅋㅋㅋㅋ -->
     <meta name="color-scheme" content="dark" />
     <!-- pwa apple -->
@@ -21,10 +21,14 @@
     <meta name="apple-mobile-web-app-title" content="출석체크" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="apple-touch-icon" href="../static/icons/icon.png" />
-    <!-- PWA android is not supporting currently-->
+    <link rel="apple-touch-icon" href="../static/icons/icon.jpeg" />
+    <!-- PWA android -->
+    <meta name="theme-color" content="black" />
+    <meta name="description" content="made by choidonghun with flask. css,html,js,python,mongodb used. closed source 출석체크 앱입니다." />
     <link rel="stylesheet" href="../static/css/common.css" />
+    <!-- <link rel="stylesheet" href="../static/css/css-dist/common.min.css" /> -->
     <link rel="stylesheet" href="../static/css/main.css" />
+    <!-- <link rel="stylesheet" href="../static/css/css-dist/main.min.css" /> -->
     <title>메인</title>
   </head>
   <body>
@@ -33,18 +37,19 @@
     <div class="main-content-area">
       <div class="welcome-and-clock">
         <div class="welcome-box">
-          <span id="welcome">Welcome,</span>
-          <span id="hi">hi,</span>
-          <i>{{userName}}</i>
+          <span id="welcome">Welcome, <i>{{userName}}</i></span>
+          <span id="hi">hi, <i>{{userName}}</i></span>
           <br />
           <div class="memu-area">
-            <button onClick="window.location.reload()">
+            <button aria-label="reload button" onClick="window.location.reload()">
               <img id="refreshBtn" src="../static/images/svg/reload_light.svg" alt="" />
             </button>
-            <button onclick="location.href = './logout'" style="color: red">Logout</button>
+            <button aria-label="logout button" onclick="location.href = './logout'" style="color: red">Logout</button>
             <span id="theme" style="display: none">light</span>
-            <button id="theme-toggle"><img id="themeIMG" src="" alt="" /></button>
-            <button>추가될 기능</button>
+            <button aria-label="Change Theme button" id="theme-toggle">
+              <img id="themeIMG" src="" alt="" />
+            </button>
+            <button aria-label="useless button" id="nouse">추가될 기능</button>
           </div>
         </div>
         <div class="clock">
@@ -54,15 +59,15 @@
           <div class="timetext">12:12:12</div>
         </div>
       </div>
-      <button class="close_btn_for_recent">
+      <button aria-label="close popup " class="close_btn_for_recent">
         <img src="../static/images/svg/close.svg" alt="" />
       </button>
       <div class="recent">
         <div class="recent-container">Recent Arrivals / Departure</div>
         <div class="recent-view">
-          {% for i in range(500)%}
+          {% for i in range(recents)%}
           <div class="recent-nth">
-            <div class="name">Weee</div>
+            <div class="name">{{i}}</div>
             <div class="arrive-depart">Departed at</div>
             <div class="time">12:23:34</div>
           </div>
@@ -71,7 +76,7 @@
       </div>
       <div class="student-overoll-shortcut">
         {% for i in StudentList %}
-        <button class="student-overoll-shortcut-inner" onclick="alert('{{i}} 출석체크 완료');location.href= '/{{i}}'">
+        <button aria-label="Check button" class="student-overoll-shortcut-inner" onclick="alert('{{i}} 출석체크 완료');location.href= '/{{i}}'">
           <img src="../static/images/pfp/{{i}}_pfp.png" alt="" />
           <p>{{i}}</p>
         </button>
