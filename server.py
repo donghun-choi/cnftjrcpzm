@@ -40,7 +40,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=LOGOUT_TIMER)
 
 @app.before_request
 def limit_remote_addr():
-    if '43' in str(request.remote_addr): # West Taiwan
+    if 'asdfasdfasdf' in str(request.remote_addr): # West Taiwan
         abort(403,"GET the FUCK out Tlqkf hahaha")  # GET the FUCK out Tlqkf hahaha
 
 @app.route('/robots.txt')
@@ -59,6 +59,7 @@ def logout():
 @app.route('/',methods=['POST',"GET"])
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
+    # 리스트 방식으로 정렬함.
     todays_data = []
     todays_data_student = []
     todays_data_time = []
@@ -84,10 +85,9 @@ def main():
         if not (username_recive and password):
             print("비번입력을 안함")
             return render_template('login.html')
-        
         resultID = IDPW.find_one({'userName':username_recive})
         resultPW = IDPW.find_one({'password':password})
-            
+        
         print("result",resultID)
         if resultID and resultPW is not None:
             session['user'] = username_recive
@@ -101,13 +101,21 @@ def main():
 @app.route("/<name>", methods=['GET'])
 def checkedName(name):
     if login():
+        late = False
         now = dt.datetime.now()
         TODAYS_DATA_FORM_DB = wmsDB[TODAY]
         CURRENT_TIME = str(now.hour)+':'+str(now.minute)+':'+str(now.second)
+        CTTSTR =int(str(now.hour)+str(now.minute))
+        print(CTTSTR)
+        if CTTSTR > 830 and CTTSTR < 1030: 
+            late = True
+        elif CTTSTR > 830:
+            late = False
         print("TODAY",TODAY)
-        data = {"name":name,"time":CURRENT_TIME,"checker":session['user']}
+        data = {"name":name,"time":CURRENT_TIME,"checker":session['user'],"late":late}
         print("data",data)
         TODAYS_DATA_FORM_DB.insert_one(data)
+        
         return redirect(url_for('main'))
     else:
         return redirect(url_for('main'))

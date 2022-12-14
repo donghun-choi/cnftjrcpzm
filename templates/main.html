@@ -61,12 +61,12 @@
         <img src="../static/images/svg/close.svg" alt="" />
       </button>
       <div class="recent">
-        <div class="recent-container">Recent Arrivals / Departure</div>
+        <div class="recent-container">Recent Arrivals</div>
         <div class="recent-view">
           {% for i in (range(howmanyrecents)) %}
           <div class="recent-nth">
             <div class="name">{{todays_data_student[howmanyrecents-i-1]}}</div>
-            <div class="arrive-depart"><strong>checker: {{Chedker_who[howmanyrecents-i-1]}} At</strong></div>
+            <div class="arrive-depart"><strong>확인자 {{Chedker_who[howmanyrecents-i-1]}} 시각:</strong></div>
             <div class="time">{{todays_data_time[howmanyrecents-i-1]}}</div>
           </div>
           {% endfor %}
@@ -75,7 +75,7 @@
       <div class="student-overoll-shortcut">
         {% for i in StudentList %}
         <button aria-label="Check button" class="student-overoll-shortcut-inner" onclick="alert('{{i}} 출석체크 완료');location.href= '/{{i}}'">
-          <img src="../static/images/pfp/{{i}}_pfp.png" alt="" />
+          <img src="../static/images/pfp/{{i}}_pfp.webp" alt="" />
           <p>{{i}}</p>
         </button>
         {% endfor %}

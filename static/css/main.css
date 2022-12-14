@@ -46,13 +46,6 @@ body.dark {
   align-items: center;
   justify-content: space-between;
 }
-.dark_theme {
-  display: flex;
-  align-items: center;
-}
-.dark_theme label {
-  font-size: 16px;
-}
 .welcome-box button:hover,
 .welcome-box button:active {
   transition: 0.3s;
@@ -116,7 +109,6 @@ button {
   transition: all var(--transitionSecond);
 
   overflow-y: scroll;
-  scrollbar-width: none;
   background: var(--recent_five);
   height: 100%;
   border-radius: 0px 24px 24px 24px;
@@ -124,9 +116,7 @@ button {
   box-sizing: border-box;
   padding: 32px;
 }
-.recent-view-full::-webkit-scrollbar {
-  display: none;
-}
+
 .recent-view-full {
   transition: all var(--transitionSecond);
 
@@ -137,7 +127,6 @@ button {
   box-sizing: border-box;
   padding: 32px;
   overflow-y: scroll;
-  scrollbar-width: none;
 }
 .recent-nth {
   transition: all var(--transitionSecond);
