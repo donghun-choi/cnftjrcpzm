@@ -5,7 +5,8 @@
     <script async src="../static/js/handleClock.js"></script>
     <script async src="../static/js/handleCheckArrival.js"></script>
     <script async src="../static/js/handleClick.js"></script>
-
+    <link rel="stylesheet" href="../static/css/common.css" />
+    <link rel="stylesheet" href="../static/css/main.css" />
     {% with messages = get_flashed_messages() %} {% if messages %}
     <script>
       alert("{{messages[-1]}}");
@@ -25,17 +26,14 @@
     <!-- PWA android -->
     <meta name="theme-color" content="black" />
     <meta name="description" content="made by choidonghun with flask. css,html,js,python,mongodb used. closed source 출석체크 앱입니다." />
-    <link rel="stylesheet" href="../static/css/common.css" />
-    <!-- <link rel="stylesheet" href="../static/css/css-dist/common.min.css" /> -->
-    <link rel="stylesheet" href="../static/css/main.css" />
-    <!-- <link rel="stylesheet" href="../static/css/css-dist/main.min.css" /> -->
+
     <title>메인</title>
   </head>
   <body>
     <noscript>Please Enable JS.</noscript>
     <noscript>자바스크립트를 활성화해주시기 바랍니다.</noscript>
     <div class="main-content-area">
-      <div class="welcome-and-clock">
+      <div class="welcome-and-clock" style="display: flex">
         <div class="welcome-box">
           <span id="welcome">Welcome, <i>{{userName}}</i></span>
           <span id="hi">hi, <i>{{userName}}</i></span>
@@ -44,7 +42,7 @@
             <button aria-label="reload button" onClick="window.location.reload()">
               <img id="refreshBtn" src="../static/images/svg/reload_light.svg" alt="" />
             </button>
-            <button aria-label="logout button" onclick="location.href = './logout'" style="color: red">Logout</button>
+            <button aria-label="logout button" onclick="location.href = './logout'">Logout</button>
             <span id="theme" style="display: none">light</span>
             <button aria-label="Change Theme button" id="theme-toggle">
               <img id="themeIMG" src="" alt="" />

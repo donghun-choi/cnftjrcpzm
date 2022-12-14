@@ -40,8 +40,8 @@ app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=LOGOUT_TIMER)
 
 @app.before_request
 def limit_remote_addr():
-    if '141.' in str(request.remote_addr): # West Taiwan
-        abort(403,"허가받지 않은 접근입니다. 차단당하셨을 확률이 가장 높습니다. 관리지에게 문의해주세요.")  # GET the FUCK out Tlqkf hahaha
+    if '43' in str(request.remote_addr): # West Taiwan
+        abort(403,"GET the FUCK out Tlqkf hahaha")  # GET the FUCK out Tlqkf hahaha
 
 @app.route('/robots.txt')
 def robot_to_root():
@@ -82,12 +82,14 @@ def main():
         username_recive = request.form['userName']
         password = request.form['password']
         if not (username_recive and password):
-            print("비번틀림")
+            print("비번입력을 안함")
             return render_template('login.html')
         
-        result = IDPW.find_one({'password':password},{'userName':username_recive})
-        print("result",result)
-        if result is not None:
+        resultID = IDPW.find_one({'userName':username_recive})
+        resultPW = IDPW.find_one({'password':password})
+            
+        print("result",resultID)
+        if resultID and resultPW is not None:
             session['user'] = username_recive
             return render_template('main.html',StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
         else:

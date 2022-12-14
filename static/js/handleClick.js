@@ -66,7 +66,11 @@ function applyTheme(theme) {
   document.body.className = theme;
   if (theme == "light") {
     document.getElementById("themeIMG").src = "../static/images/svg/sun.svg";
-  } else document.getElementById("themeIMG").src = "../static/images/svg/moon.svg";
+    document.getElementById("refreshBtn").src = "../static/images/svg/reload_light.svg";
+  } else {
+    document.getElementById("themeIMG").src = "../static/images/svg/moon.svg";
+    document.getElementById("refreshBtn").src = "../static/images/svg/reload_dark.svg";
+  }
 }
 
 function rotateTheme(theme) {
