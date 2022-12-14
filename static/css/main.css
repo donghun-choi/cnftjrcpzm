@@ -147,18 +147,20 @@ button {
   font-weight: 600;
   margin-right: auto;
 }
-.recent-nth .arrive-depart {
+.recent-nth .checker {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
   margin-right: 10px;
 }
 .recent-nth .save {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 600;
+  margin-right: 2px;
 }
 .recent-nth .time {
   font-size: 12px;
   font-weight: 600;
+  margin-right: 8px;
 }
 .student-overoll-shortcut {
   transition: all var(--transitionSecond);
@@ -252,9 +254,6 @@ button {
   background: white;
 }
 @media all and (min-width: 600px) and (max-width: 866px) {
-  #hi {
-    display: none;
-  }
   #welcome {
     display: block;
   }
@@ -277,9 +276,6 @@ button {
 @media all and (min-width: 0px) and (max-width: 600px) {
   #hi {
     display: block;
-  }
-  #welcome {
-    display: none;
   }
   .memu-area {
     margin-top: 0px;
@@ -304,9 +300,7 @@ button {
     margin-bottom: 12px;
     padding: 12px;
   }
-  #nouse {
-    display: none;
-  }
+
   .main-content-area {
     border-radius: 16px;
     max-width: 100vw;
@@ -334,6 +328,11 @@ button {
     height: 320px;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
+  }
+  #welcome,
+  #nouse,
+  .checker {
+    display: none;
   }
 }
 #theme-toggle {

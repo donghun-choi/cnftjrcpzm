@@ -66,9 +66,9 @@
           {% for i in (range(howmanyrecents)) %}
           <div class="recent-nth">
             <div class="name">{{todays_data_student[howmanyrecents-i-1]}}</div>
-            <div class="arrive-depart"><strong>확인자 {{Chedker_who[howmanyrecents-i-1]}} 지각여부:</strong></div>
-            <div class="save">{{isitlate[howmanyrecents-i-1]}}</div>
-            <div class="time">{{todays_data_time[howmanyrecents-i-1]}}</div>
+            <div class="checker">확인자 : <strong>{{Chedker_who[howmanyrecents-i-1]}}</strong></div>
+            <div class="time">도착시각 : <strong>{{todays_data_time[howmanyrecents-i-1]}}</strong></div>
+            <div class="save">지각여부 : <strong>{{isitlate[howmanyrecents-i-1]}}</strong></div>
           </div>
           {% endfor %}
         </div>
