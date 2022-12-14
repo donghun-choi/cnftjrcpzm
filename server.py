@@ -64,6 +64,7 @@ def main():
     todays_data_student = []
     todays_data_time = []
     Chedker_who = []
+    isitlate = []
 
     for x in TODAYS_DATA_FORM_DB.find():
         if not "favicon.ico" in str(x):
@@ -71,12 +72,13 @@ def main():
             todays_data_student.append(x['name']);
             todays_data_time.append(x['time']);
             Chedker_who.append(x['checker'])
+            isitlate.append(x['late'])
             
 
     print("todays_data",todays_data)
     if request.method == 'GET':
         if login():
-            return render_template('main.html',StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
+            return render_template('main.html',isitlate=isitlate,StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
         return render_template('login.html')
             
     elif request.method == 'POST':
@@ -91,7 +93,7 @@ def main():
         print("result",resultID)
         if resultID and resultPW is not None:
             session['user'] = username_recive
-            return render_template('main.html',StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
+            return render_template('main.html',isitlate=isitlate,StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
         else:
             print("비번틀림")
             flash("비밀번호나 ID를 다시 한번 확인해주세요")
