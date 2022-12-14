@@ -149,7 +149,11 @@ button {
 }
 .recent-nth .arrive-depart {
   font-size: 12px;
-  font-style: italic;
+  font-weight: 400;
+  margin-right: 10px;
+}
+.recent-nth .save {
+  font-size: 12px;
   font-weight: 400;
   margin-right: 10px;
 }
