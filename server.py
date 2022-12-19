@@ -1,6 +1,11 @@
+from io import *
 from flask import *
 import datetime as dt
+import pandas as pd
 import pymongo
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 def login():
     if 'user' in session:
@@ -24,9 +29,6 @@ student_list = []
 
 for x in STUDENTS_LIST_FROM_DB:
     student_list.append(x['name'])
-
-student_list = set(student_list)
-student_list = list(student_list)
 
 print("student_list",student_list)
 
@@ -56,6 +58,8 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('main'))
 
+isitlate = []
+
 @app.route('/',methods=['POST',"GET"])
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
@@ -68,22 +72,21 @@ def main():
 
     for x in TODAYS_DATA_FORM_DB.find():
         if not "favicon.ico" in str(x):
-            todays_data.append(x['name']);
-            todays_data_student.append(x['name']);
-            todays_data_time.append(x['time']);
+            todays_data.append(x['name'])
+            todays_data_student.append(x['name'])
+            todays_data_time.append(x['time'])
             Chedker_who.append(x['checker'])
             isitlate.append(x['late'])
             
 
-    print("todays_data",todays_data)
     if request.method == 'GET':
         if login():
             return render_template('main.html',isitlate=isitlate,StudentList = student_list, userName = session['user'],howmanyrecents = len(todays_data),todays_data_student = todays_data_student,todays_data_time = todays_data_time,Chedker_who=Chedker_who)
         return render_template('login.html')
             
     elif request.method == 'POST':
-        username_recive = request.form['userName']
-        password = request.form['password']
+        username_recive = request.form.get('userName')
+        password = request.form.get('password')
         if not (username_recive and password):
             print("비번입력을 안함")
             return render_template('login.html')
@@ -98,11 +101,13 @@ def main():
             print("비번틀림")
             flash("비밀번호나 ID를 다시 한번 확인해주세요")
             return render_template('login.html')
-        
 
 @app.route("/<name>", methods=['GET'])
 def checkedName(name):
     if login():
+        if not name in student_list:
+            flash("그건 우리 학생이 아닌데요?")
+            return redirect(url_for("main"))
         late = False
         now = dt.datetime.now()
         TODAYS_DATA_FORM_DB = wmsDB[TODAY]
@@ -120,9 +125,7 @@ def checkedName(name):
         
         return redirect(url_for('main'))
     else:
-        return redirect(url_for('main'))
-
-
+        return redirect(url_for("main"))
 @app.errorhandler(503)
 def server_error(e):
     print('server_error 503')
