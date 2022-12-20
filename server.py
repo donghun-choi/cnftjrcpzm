@@ -137,4 +137,4 @@ def page_not_found(error):
 
 PORT = 12342
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=PORT, threaded=True, debug=True, ssl_content=("./cert.pem", "./key.pem"))
+    app.run(host="0.0.0.0", port=PORT, threaded=True, debug=True)
