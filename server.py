@@ -3,9 +3,9 @@ from flask import *
 import datetime as dt
 import pandas as pd
 import pymongo
-import logging
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+# import logging
+# log = logging.getLogger('werkzeug')
+# log.setLevel(logging.ERROR)
 
 def login():
     if 'user' in session:
@@ -24,12 +24,15 @@ TODAYS_DATA_FORM_DB = wmsDB[TODAY]
 STUDENTS_LIST_FROM_DB = wmsDB.student_list
 
 STUDENTS_LIST_FROM_DB = STUDENTS_LIST_FROM_DB.find()
-
+todays_data = []
 student_list = []
-
+todays_data_student = []
+todays_data_time = []
+Chedker_who = []
+isitlate = []
 for x in STUDENTS_LIST_FROM_DB:
     student_list.append(x['name'])
-
+student_list = sorted(student_list)
 print("student_list",student_list)
 
 
@@ -42,7 +45,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] = dt.timedelta(minutes=LOGOUT_TIMER)
 
 @app.before_request
 def limit_remote_addr():
-    if 'asdfasdfasdf' in str(request.remote_addr): # West Taiwan
+    if '43' in str(request.remote_addr): # West Taiwan
         abort(403,"GET the FUCK out Tlqkf hahaha")  # GET the FUCK out Tlqkf hahaha
 
 @app.route('/robots.txt')
@@ -64,11 +67,7 @@ isitlate = []
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
     # 리스트 방식으로 정렬함.
-    todays_data = []
-    todays_data_student = []
-    todays_data_time = []
-    Chedker_who = []
-    isitlate = []
+
 
     for x in TODAYS_DATA_FORM_DB.find():
         if not "favicon.ico" in str(x):
@@ -138,4 +137,4 @@ def page_not_found(error):
 
 PORT = 12342
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=PORT, threaded=True, debug=True)
+    app.run(host="0.0.0.0", port=PORT, threaded=True, debug=True, ssl_content=("./cert.pem", "./key.pem"))
