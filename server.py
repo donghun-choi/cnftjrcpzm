@@ -24,12 +24,10 @@ TODAYS_DATA_FORM_DB = wmsDB[TODAY]
 STUDENTS_LIST_FROM_DB = wmsDB.student_list
 
 STUDENTS_LIST_FROM_DB = STUDENTS_LIST_FROM_DB.find()
-todays_data = []
+
 student_list = []
-todays_data_student = []
-todays_data_time = []
-Chedker_who = []
-isitlate = []
+
+
 for x in STUDENTS_LIST_FROM_DB:
     student_list.append(x['name'])
 student_list = sorted(student_list)
@@ -67,10 +65,15 @@ isitlate = []
 def main():
     TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
     # 리스트 방식으로 정렬함.
-
+    todays_data = []
+    todays_data_student = []
+    todays_data_time = []
+    Chedker_who = []
+    isitlate = []
 
     for x in TODAYS_DATA_FORM_DB.find():
         if not "favicon.ico" in str(x):
+
             todays_data.append(x['name'])
             todays_data_student.append(x['name'])
             todays_data_time.append(x['time'])
@@ -121,7 +124,8 @@ def checkedName(name):
         data = {"name":name,"time":CURRENT_TIME,"checker":session['user'],"late":late}
         print("data",data)
         TODAYS_DATA_FORM_DB.insert_one(data)
-        
+        data = {}
+        print(data)
         return redirect(url_for('main'))
     else:
         return redirect(url_for("main"))
