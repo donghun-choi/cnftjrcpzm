@@ -108,7 +108,7 @@ def main():
 def checkedName(name):
     if login():
         if not name in student_list:
-            flash("그건 우리 학생이 아닌데요?")
+            flash("옳바르지 않은 접근입니다.")
             return redirect(url_for("main"))
         late = False
         now = dt.datetime.now()
