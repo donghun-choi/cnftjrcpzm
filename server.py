@@ -17,7 +17,7 @@ def login():
 LOGOUT_TIMER = 240
 TODAY = str(dt.datetime.now().month)+'월'+str(dt.datetime.now().day)+'일'
 
-mongoDB_SERVER = pymongo.MongoClient("mongodb+srv://choidonghun:20060831@wms.9wulu4w.mongodb.net/?retryWrites=true&w=majority")
+#mongoDB_SERVER = pymongo.MongoClient("Replace with your mongo")
 wmsDB = mongoDB_SERVER.wms
 
 TODAYS_DATA_FORM_DB = wmsDB[TODAY]
